@@ -13,11 +13,11 @@ int do_work(int *my_int, int retval)
 	int counter;
 	int x = *my_int;
 	int product;
-	for (count = 0; count < *my_int; ++count)
+	for (i = 0; i < *my_int; ++i)
 		udelay(10);
 	if (tmp < 10)
 		pr_info("We slept a long time!");
-	x = counter * tmp;
+	x = i * tmp;
 	return 0;
 }
 
