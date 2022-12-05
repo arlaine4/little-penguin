@@ -1,3 +1,6 @@
+http://www.embeddedlinux.org.cn/essentiallinuxdevicedrivers/final/ch05lev1sec7.html
+
+
 ls /sys/class/misc
 cat /proc/misc
 
