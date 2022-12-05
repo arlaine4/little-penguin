@@ -13,6 +13,7 @@ int do_work(int *my_int, int retval)
 	int counter;
 	int x = *my_int;
 	int product;
+
 	for (i = 0; i < *my_int; ++i)
 		udelay(10);
 	if (tmp < 10)
@@ -24,6 +25,7 @@ int do_work(int *my_int, int retval)
 int my_init(void)
 {
 	int ret = 10;
+
 	ret = do_work(&ret, ret);
 	return ret;
 }
