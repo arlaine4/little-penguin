@@ -1,0 +1,7 @@
+ls /sys/class/misc
+cat /proc/misc
+
+list in order to check with dmesg:
+make
+insmod main.ko
+dmesg | tail -1
