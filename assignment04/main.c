@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -40,7 +41,7 @@ int	init_module(void)
 {
 	printk(KERN_INFO "Hello world !\n");
 	/*
-	 * usb_register is a built-in function that takes a usb_driver struct pointer 
+	 * usb_register is a built-in function that takes a usb_driver struct pointer
 	 * as parameter. Define usb_elements inside the usb_driver struct
 	 */
 	return usb_register(&hello_driver);

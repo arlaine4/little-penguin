@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: GPL-2.0
 #include <stdio.h>
 #include <unistd.h>
 #include <fcntl.h>
@@ -12,10 +13,9 @@ int	main(void)
 	int	fd;
 	int	ret;
 
-	bzero(buf, 10);	
+	bzero(buf, 10);
 	fd = open("/dev/fortytwo", O_RDWR);
-	if (fd > 0)
-	{
+	if (fd > 0) {
 		ret = read(fd, buf, 10);
 		printf("1st read [%s] ret : %d\n", buf, ret);
 
