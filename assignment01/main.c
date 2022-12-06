@@ -11,7 +11,7 @@ MODULE_DESCRIPTION("Simple Hello World KM");
 int	init_module(void)
 {
 	printk(KERN_INFO "Hello world !\n");
-	return(0);
+	return (0);
 }
 
 void	cleanup_module(void)
