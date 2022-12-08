@@ -10,10 +10,12 @@ MODULE_LICENSE("Dual MIT/GPL");
 MODULE_AUTHOR("Arthur LAINE");
 MODULE_DESCRIPTION("Useless module");
 
-static ssize_t myfd_read(struct file *fp, char __user *user, size_t size, loff_t *offs);
-static ssize_t myfd_write(struct file *fp, char __user *user, size_t size, loff_t *offs);
+static ssize_t myfd_read(struct file *fp, char __user *user, size_t size,
+							loff_t *offs);
+static ssize_t myfd_write(struct file *fp, const char __user *user, size_t size,
+							loff_t *offs);
 
-static struct file_operations myfd_ops = {
+static const struct file_operations myfd_ops = {
 	.owner = THIS_MODULE,
 	.read = myfd_read,
 	.write = myfd_write,
@@ -25,12 +27,14 @@ static struct miscdevice myfd_device = {
 	.fops = &myfd_ops,
 };
 
-char str[PAGE_SIZE];
-char *tmp;
+char str[PAGE_SIZE + 1];
 
 static int __init myfd_init(void)
 {
-	return misc_register(&myfd_device);
+	int retval = 0;
+
+	retval = misc_register(&myfd_device);
+	return retval;
 }
 
 static void __exit myfd_cleanup(void)
@@ -38,32 +42,37 @@ static void __exit myfd_cleanup(void)
 	misc_deregister(&myfd_device);
 }
 
-size_t myfd_read(struct file *fp, char __user *user, size_t size, loff_t *offs)
+ssize_t myfd_read(struct file *fp, char __user *user, size_t size, loff_t *offs)
 {
-	size_t j, i;
-	char *tmp2;
+	size_t t;
+	size_t i;
+	ssize_t retval = 0;
+	char *tmp;
 
 	/*
 	 * Malloc like a boss
 	 */
-	tmp2 = kmalloc(sizeof(char) * PAGE_SIZE * 2, GFP_KERNEL);
-	tmp = tmp2;
-	for (j = strlen(str) - 1, i = 0; j >= 0; j--, i++) {
-		tmp[i] = str[j];
+	tmp = kmalloc(sizeof(char) * PAGE_SIZE, GFP_KERNEL);
+	if (!tmp) {
+		retval = -EINVAL;
+		goto out;
 	}
-	tmp[i] = 0x0;
-	return simple_read_from_buffer(user, size, offs, tmp, i);
+	for (t = strlen(str), i = 0; t > 0; t--, i++)
+		tmp[i] = str[t];
+	tmp[i] = str[t];
+	tmp[++i] = 0x0;
+	retval = simple_read_from_buffer(user, size, offs, tmp, i);
+	kfree(tmp);
+out:
+	return retval;
 }
 
 ssize_t	myfd_write(struct file *fp, const char __user *user, size_t size, loff_t *offs)
 {
-	ssize_t	res;
+	ssize_t	res = 0;
 
-	res = 0;
-	res = simple_write_to_buffer(str, size, offs, user, size) + 1;
-	/*
-	* 0x0 = '\0'
-	*/
+	res = simple_write_to_buffer(str, PAGE_SIZE, offs, user, size);
+	/* 0x0 = '\0' */
 	str[size + 1] = 0x0;
 	return res;
 }
