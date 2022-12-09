@@ -1,0 +1,25 @@
+From fe0058daafd99a63c73be35e5d0ad613dc4572b9 Mon Sep 17 00:00:00 2001
+From: arlaine4 <arthur.laine99@gmail.com>
+Date: Fri, 9 Dec 2022 11:20:11 +0100
+Subject: [PATCH 1/1] updated extraversion field
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index 28026d1ebb9d..ab700d93768f 100644
+--- a/Makefile
++++ b/Makefile
+@@ -2,7 +2,7 @@
+ VERSION = 6
+ PATCHLEVEL = 1
+ SUBLEVEL = 0
+-EXTRAVERSION = -rc3
++EXTRAVERSION = -thor_kernel
+ NAME = Hurr durr I'ma ninja sloth
+ 
+ # *DOCUMENTATION*
+-- 
+2.24.3 (Apple Git-128)
+
