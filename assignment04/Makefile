@@ -1,4 +1,4 @@
-obj-m += main.o
+obj-m += usb_keyboard_module.o
 
 all: modules
 

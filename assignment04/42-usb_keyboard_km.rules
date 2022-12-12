@@ -1,0 +1,1 @@
+action=="add", SUBSYSTEM=="usb", ATTRS{bInterfaceClass}=="03", ATTRS{bInterfaceProtocol}=="01", RUN+="/usr/sbin/insmod /home/arlaine/repo/assigment_04/usb_keyboard_module.ko"

@@ -1,0 +1,5 @@
+[Mon Dec 12 10:19:28 2022] Hello World!.
+[Mon Dec 12 10:20:00 2022] Cleaning up module.
+[Mon Dec 12 11:41:34 2022] kworker/dying (44) used greatest stack depth: 12240 bytes left
+[Mon Dec 12 13:21:03 2022] usb_keyboard_module: USB Keyboard plugged.
+[Mon Dec 12 13:23:03 2022] usb_keyboard_module: USB Keyboard disconnected.
